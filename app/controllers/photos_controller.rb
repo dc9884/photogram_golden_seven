@@ -1,5 +1,12 @@
 class PhotosController < ApplicationController
 
+def index
+
+@all_photos = Photo.all
+
+  render("photos/index.html.erb")
+end
+
 def show
 
   id_number = params["photo_id"]
