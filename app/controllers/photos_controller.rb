@@ -1,8 +1,14 @@
 class PhotosController < ApplicationController
 
+def home
+
+  @all_photos = Photo.all
+  render("photos/index.html.erb")
+  end
+
 def index
 
-@all_photos = Photo.all
+  @all_photos = Photo.all
 
   render("photos/index.html.erb")
 end
@@ -40,7 +46,7 @@ def edit_form
   @photo_source = @photo.source
   @photo_caption = @photo.caption
 
-  render("photos/edit_form.html.erb")
+  render("/photos/edit_form.html.erb")
 
 end
 
@@ -51,8 +57,15 @@ def update_row
   p.caption = params[:the_caption]
   p.save
 
-  redirect_to("/photos")
+  redirect_to("/photos/#{p.id}")
 end
 
+def delete_row
+
+    p = Photo.find(params[:photo_id])
+    p = p.delete
+
+    redirect_to("/photos")
+  end
 
 end
